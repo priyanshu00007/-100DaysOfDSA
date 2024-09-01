@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<int> frequencySort(vector<int>& nums) {
+        unordered_map<int, int> freq;
+        for (int num : nums) freq[num]++;
+        
+        vector<pair<int, int>> freqNums;
+        for (auto& it : freq) freqNums.push_back({it.second, -it.first});
+        
+        sort(freqNums.begin(), freqNums.end());
+        
+        vector<int> result;
+        for (auto& it : freqNums) {
+            int count = it.first;
+            int num = -it.second;
+            result.insert(result.end(), count, num);
+        }
+        return result;
+    }
+};

@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int left = 0;
+        int right = nums.size() - 1;
+        
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            
+            // Ensure mid is even (move one step back if it's odd)
+            if (mid % 2 == 1) {
+                mid--;
+            }
+            
+            // Compare the pair starting at mid
+            if (nums[mid] == nums[mid + 1]) {
+                // If the pair is valid, the single element is in the right half
+                left = mid + 2;
+            } else {
+                // Otherwise, it's in the left half or at mid itself
+                right = mid;
+            }
+        }
+        
+        // Left will point to the single element
+        return nums[left];
+    }
+};

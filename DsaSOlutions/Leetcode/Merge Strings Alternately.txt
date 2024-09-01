@@ -1,0 +1,21 @@
+class Solution {
+public:
+    string mergeAlternately(string word1, string word2) {
+        string result;
+        int i = 0, j = 0;
+        
+        // Loop through both strings until we reach the end of both
+        while (i < word1.size() || j < word2.size()) {
+            // If there are still characters left in word1, append the current character to the result
+            if (i < word1.size()) {
+                result += word1[i++];
+            }
+            // If there are still characters left in word2, append the current character to the result
+            if (j < word2.size()) {
+                result += word2[j++];
+            }
+        }
+        
+        return result;
+    }
+};

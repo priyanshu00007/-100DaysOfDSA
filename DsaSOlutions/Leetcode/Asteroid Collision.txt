@@ -1,0 +1,33 @@
+#include <vector>
+#include <stack>
+#include <cmath>
+
+using namespace std;
+
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        vector<int> result; // To store the remaining asteroids after collision
+        
+        for (int asteroid : asteroids) {
+            // If the stack is empty or the current asteroid is moving to the right (positive value), push it onto the stack.
+            if (result.empty() || asteroid > 0) {
+                result.push_back(asteroid);
+            }
+            else {
+                // If the current asteroid is moving to the left (negative value):
+                while (!result.empty() && result.back() > 0 && result.back() < abs(asteroid)) {
+                    result.pop_back(); // Destroy the asteroid moving to the right
+                }
+                if (result.empty() || result.back() < 0) {
+                    result.push_back(asteroid); // Asteroid moving to the left or no collision
+                }
+                else if (result.back() == -asteroid) {
+                    result.pop_back(); // Both asteroids destroy each other
+                }
+            }
+        }
+        
+        return result;
+    }
+};
